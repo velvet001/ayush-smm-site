@@ -29,7 +29,7 @@
     .pill{display:inline-flex;align-items:center;gap:8px;border:1px solid rgba(255,255,255,.12);border-radius:999px;padding:6px 12px;color:var(--muted)}
     h1{font-size:clamp(32px,5vw,52px);line-height:1.05;margin:14px 0}
     .lead{font-size:clamp(16px,2.2vw,19px);color:var(--muted);max-width:54ch;margin:0 auto}
-    .btn{padding:12px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.12);font-weight:700}
+    .btn{padding:12px 18px;border-radius:14px;border:1px solid rgba(255,255,255,.12);font-weight:700;cursor:pointer}
     .btn.primary{background:linear-gradient(135deg,var(--brand),var(--brand2));color:#0b0f14;border:none}
 
     .hero-card{background:radial-gradient(1200px 400px at 60% -20%, rgba(110,231,255,.15), transparent 50%),var(--card);border:1px solid rgba(255,255,255,.08);border-radius:var(--radius);box-shadow:var(--shadow);padding:22px;margin:0 auto;max-width:600px}
@@ -79,9 +79,9 @@
         </div>
         <aside class="hero-card">
           <div class="grid">
-            <div class="mini"><h3>Content Calendar</h3><p>30‑day plan with hooks, captions & assets.</p></div>
+            <div class="mini"><h3>Content Calendar</h3><p>30-day plan with hooks, captions & assets.</p></div>
             <div class="mini"><h3>Daily Posting</h3><p>Scheduling + replies to comments/DMs.</p></div>
-            <div class="mini"><h3>Blog & SEO</h3><p>WordPress setup, keywords, on‑page SEO.</p></div>
+            <div class="mini"><h3>Blog & SEO</h3><p>WordPress setup, keywords, on-page SEO.</p></div>
             <div class="mini"><h3>Analytics</h3><p>UTM tracking & weekly reports.</p></div>
           </div>
         </aside>
@@ -100,13 +100,10 @@
     <section id="contact">
       <div class="section-head"><h2>Let’s Work Together</h2><p>Tell me about your goals and I’ll reply with a short plan + pricing.</p></div>
       <div class="card">
-        <form action="https://formspree.io/f/myzlgkjv" method="POST">
+        <form id="contactForm">
           <input type="text" name="name" placeholder="Your name" required>
           <input type="email" name="email" placeholder="Email" required>
           <textarea name="message" placeholder="What do you want to achieve? (e.g., grow IG to 10k, start a blog, daily posts on X)" required></textarea>
-          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
-          <input type="hidden" name="_subject" value="New lead from Ayush SMM site">
-          <input type="hidden" name="_redirect" value="https://ayush-smm-site.vercel.app/#thanks">
           <button class="btn primary" type="submit">Send Message</button>
         </form>
       </div>
@@ -124,12 +121,16 @@
 
   <script>
     document.getElementById('y').textContent = new Date().getFullYear();
-    (function(){
-      const thx = document.getElementById('thanks');
-      if(!thx) return;
-      function update(){ const show = location.hash === '#thanks'; thx.style.display = show ? 'block' : 'none'; if(show){ window.scrollTo({top: thx.offsetTop - 80, behavior:'smooth'});} }
-      window.addEventListener('hashchange', update); update();
-    })();
+
+    const form = document.getElementById('contactForm');
+    const thanks = document.getElementById('thanks');
+
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      form.reset();
+      thanks.style.display = 'block';
+      window.scrollTo({ top: thanks.offsetTop - 80, behavior: 'smooth' });
+    });
   </script>
 </body>
 </html>
